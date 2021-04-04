@@ -1,17 +1,19 @@
-* {
-  margin: 0;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@layer components{
+	.button{		
+		@apply bg-twitter focus:outline-none text-center px-4 py-3 font-bold text-white rounded-full hover:bg-twitter-dark active:bg-twitter-dark
+	}
+	.input-form{		
+		@apply w-full focus:outline-none focus:ring-1 focus:border-blue-500 border-gray-300 border px-4 pt-3 pb-2 text-gray-700 rounded-md text-lg 
+	}	
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+	.special-label-holder input:focus ~ label, .special-label-holder input:not(:placeholder-shown) ~ label
+	{
+ 		top: -5px;
+        font-size: 11px;
+        color: #1da1f2;
+	}
 }
