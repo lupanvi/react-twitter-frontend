@@ -16,11 +16,11 @@ function App() {
       <Provider store={store}>
         <Router>        
             <Switch>
-              <Route path={["/login", "/"]} exact>
+              <Route path={["/", "/login"]} exact>
                 <GuestLayout>
                   <Switch>
                     <Route path="/" exact component={Default} />                      
-                    <Route path="/login" component={Login} />	
+                    <Route path="/login" exact component={Login} />	
                   </Switch> 
                 </GuestLayout>
               </Route>  
@@ -28,7 +28,8 @@ function App() {
                 <MainLayout>
                   <Switch>                    
                     <ProtectedRoute 
-                      path="/home"                       
+                      path="/home" 
+                      exact                       
                       component={Home} 
                     />
                   </Switch>

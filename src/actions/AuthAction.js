@@ -3,8 +3,10 @@ import {
     LOGIN_USER_START,
     SET_USER,
     SET_USER_ERROR,
-    CHECK_USER_START  
+    CHECK_USER_START,
+	LOGOUT_USER  
 } from 'types'
+import handleErrorResponse from 'utils/HandleErrorResponse'
 
 export function loginUserAction(credentials){
 	return async (dispatch) =>{
@@ -13,8 +15,8 @@ export function loginUserAction(credentials){
             await $http.get('/sanctum/csrf-cookie')
     		const {data} = await $http.post("/login", credentials) 			
 			dispatch(setUser(data))		
-		}catch(error){
-			dispatch(setUserError(error))
+		}catch(e){
+			dispatch(setUserError(e))
 		}
 	}
 }
@@ -26,18 +28,19 @@ export function checkUserAction(credentials){
     		const {data} = await $http.get("/api/user", credentials)  			
 			dispatch(setUser(data))		
 		}catch(error){
-			dispatch(setUserError(error))
+			console.log(e);
+			dispatch(setUserError(e))
 		}
 	}
 }
 
 export function logoutUserAction(){
 	return async (dispatch) =>{		
-		try{
-			await $http.post('/api/logout')						
-			dispatch(setUser({}))		
-		}catch(error){
-			dispatch(setUserError(error))
+		try{			
+			await $http.post('/logout')				
+			dispatch(LogoutUser())					
+		}catch(e){			
+			dispatch(setUserError(e))
 		}
 	}
 }
@@ -55,6 +58,10 @@ const loginUserStart = user => ({
 const setUser = user => ({
 	type: SET_USER,
 	payload: user
+})
+
+const LogoutUser = () => ({
+	type: LOGOUT_USER		
 })
 
 const setUserError = error => ({

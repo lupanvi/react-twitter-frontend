@@ -2,9 +2,10 @@ import {
     LOGIN_USER_START,
     SET_USER,
     SET_USER_ERROR,
-    CHECK_USER_START    
+    CHECK_USER_START,
+	LOGOUT_USER    
 } from 'types'
-import {isLoggedIn} from 'utils/storage'
+import {isLoggedIn, setAuth, removeAuth} from 'utils/storage'
 
 const initialState = {
 	user: {},
@@ -22,13 +23,21 @@ export default function (state = initialState, action){
 				loading: action.payload
 			}
         case SET_USER:
-			localStorage.setItem('authenticated', 'true')
+			setAuth()			
             return {
                 ...state,
                 loading: false, 
                 isAuthenticated: true,               
                 user: action.payload
-            }				
+            }
+		case LOGOUT_USER:
+			removeAuth()
+			return {
+				...state,
+				loading: false, 
+				isAuthenticated: false,               
+				user: {}
+			}					
 		case SET_USER_ERROR:
 			return {
 				...state,

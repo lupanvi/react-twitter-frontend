@@ -40,7 +40,7 @@ function Login() {
 	    	   <h1 className="text-4xl font-bold my-10 ">Login</h1>
 			   { error && 
 					<div className="text-red-500 text-center"> 
-						{error.response.data.message}
+						{error.message}
 					</div> 
 				}	
 		       <form onSubmit={submitLogin}>		    	   

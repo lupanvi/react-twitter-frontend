@@ -14,8 +14,8 @@ export function getTweetsAction(){
 		try{
 			const {data} = await $http.get('/api/tweets')						
 			dispatch(setTweets(data))		
-		}catch(error){
-			dispatch(setTweetsError(error))
+		}catch(e){
+			dispatch(setTweetsError(e))
 		}
 	}
 }
@@ -39,7 +39,7 @@ export function addTweetAction(tweet){
 	return async (dispatch) =>{		
 		try{
 			const {data} = await $http.post('/api/tweets', tweet)
-			return dispatch(addTweetSuccess(data))		
+			dispatch(addTweetSuccess(data))		
 		}catch(e){
 			
 		}

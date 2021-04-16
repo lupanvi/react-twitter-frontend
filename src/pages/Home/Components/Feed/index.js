@@ -14,7 +14,7 @@ function Feed() {
   useEffect( () => {
 
     const getTweets = () => dispatch(getTweetsAction())
-    getTweets()   
+    getTweets()
 
   }, [])
 

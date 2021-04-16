@@ -1,9 +1,9 @@
 export const isLoggedIn = ()=>{
     return !!localStorage.getItem('authenticated')
 }
-export const setAuth = (value)=>{
-    localStorage.setItem('authenticated', value)
+export const setAuth = ()=>{
+    return localStorage.setItem('authenticated', 'true')
 }
 export const removeAuth = ()=>{
-    localStorage.removeItem('authenticated')
+    return localStorage.removeItem('authenticated')
 }
