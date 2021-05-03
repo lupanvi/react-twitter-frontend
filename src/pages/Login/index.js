@@ -5,15 +5,14 @@ import {useHistory} from 'react-router-dom';
 import {loginUserAction} from 'actions/AuthAction'
 
 function Login() {
-
-	const dispatch = useDispatch() 
+	
+	const dispatch = useDispatch()
+	const history = useHistory()	
 
 	const [form , setForm] = useState({
         email : "",
         password : ""        
-    })
-	
-	const history = useHistory()
+    })		
 
     const handleChange = (e) => {
         setForm({
@@ -21,17 +20,17 @@ function Login() {
             [e.target.name] : e.target.value
         })
     }	
-
-	const submitLogin = async (e) => {
-		e.preventDefault()
-		await dispatch(loginUserAction(form))   
-		history.push('/home')    	
-	}
 	
-  	const error = useSelector(state => state.auth.error)
+	const submitLogin = async (e) => {	
+		e.preventDefault()		
+		await dispatch(loginUserAction(form))		
+		history.push('/home')				
+	}	
+	
+	const error = useSelector(state=>state.auth.error)
 
 	const { email, password } = form
-	const enabled = email.length > 0 && password.length > 0
+	const enabled = email.length > 0 && password.length > 0	
 
 	return (		
 		<div className="login" data-test="component-login">     			    
@@ -40,10 +39,10 @@ function Login() {
 	    	   <h1 className="text-4xl font-bold my-10 ">Login</h1>
 			   { error && 
 					<div className="text-red-500 text-center"> 
-						{error.message}
+						{error}
 					</div> 
 				}	
-		       <form onSubmit={submitLogin}>		    	   
+		       <form onSubmit={(e)=>submitLogin(e)}>		    	   
 		    	   <div className="special-label-holder relative mt-5">
 			    	   <input 
 			    	   	type="text" 

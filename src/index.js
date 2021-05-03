@@ -1,8 +1,12 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './components/App';
-import reportWebVitals from './reportWebVitals';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './index.css'
+import App from './components/App'
+import reportWebVitals from './reportWebVitals'
+import store from 'store'
+import {checkUserAction} from 'actions/AuthAction'
+
+store.dispatch(checkUserAction())
 
 ReactDOM.render(
   <React.StrictMode>

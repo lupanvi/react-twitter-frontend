@@ -9,18 +9,19 @@ import {isLoggedIn, setAuth, removeAuth} from 'utils/storage'
 
 const initialState = {
 	user: {},
-    isAuthenticated: !!isLoggedIn(),
+    isAuthenticated: !!isLoggedIn(),	
 	error: null,
 	loading: false	
 }
 
 export default function (state = initialState, action){
-	switch(action.type){		
+	switch(action.type){
 		case LOGIN_USER_START:		
         case CHECK_USER_START:		
 			return {
 				...state,
-				loading: action.payload
+				error: null,
+				loading: action.payload				
 			}
         case SET_USER:
 			setAuth()			

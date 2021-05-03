@@ -15,21 +15,20 @@ export function loginUserAction(credentials){
             await $http.get('/sanctum/csrf-cookie')
     		const {data} = await $http.post("/login", credentials) 			
 			dispatch(setUser(data))		
-		}catch(e){
-			dispatch(setUserError(e))
+		}catch(e){									
+			dispatch(setUserError(e.response.data.message))			
 		}
 	}
 }
 
-export function checkUserAction(credentials){
+export function checkUserAction(){
 	return async (dispatch) =>{
 		dispatch(checkUserStart())
 		try{            
-    		const {data} = await $http.get("/api/user", credentials)  			
-			dispatch(setUser(data))		
-		}catch(error){
-			console.log(e);
-			dispatch(setUserError(e))
+    		const {data} = await $http.get("/api/user")  						
+			dispatch(setUser(data))					
+		}catch(e){			
+			dispatch(LogoutUser())								
 		}
 	}
 }
