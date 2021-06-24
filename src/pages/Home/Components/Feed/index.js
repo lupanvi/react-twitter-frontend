@@ -11,16 +11,13 @@ function Feed() {
 
   const dispatch = useDispatch()  
 
-  useEffect( () => {
-
-    const getTweets = () => dispatch(getTweetsAction())
-    getTweets()
-
+  useEffect( () => {    
+    dispatch(getTweetsAction())
   }, [])
-
+ 
   const tweets = useSelector(state => state.tweets.tweets)
   const loading = useSelector(state => state.tweets.loading)
-  const error = useSelector(state => state.tweets.error)
+  const errors = useSelector(state => state.error.errors)
 
   return (
     <div className="feed border-r overflow-y-scroll w-full flex-shrink-0 max-w-screen-sm" data-test="component-feed">
@@ -28,6 +25,7 @@ function Feed() {
         <h2 className="font-bold text-2xl">Home</h2>       
       </div>      
       <TweetBox data-test="component-tweet-box" />
+      
       <div className="h-3 bg-gray-100"></div>
       {
         loading && 
@@ -35,15 +33,14 @@ function Feed() {
             <AiOutlineLoading3Quarters className="text-twitter animate-spin text-2xl" />
           </div>
       }
-      {
-        error && 
-          <div className="flex justify-center p-3 bg-red-300 rounded-3xl">
-            There was an error loading tweets
-          </div>
-      }
+      { errors && 
+					<div>
+						<div className="font-medium text-red-600">There was an error</div>						
+					</div>
+				}
       <FlipMove>
 	      { 
-          tweets.map((tweet) => (
+          tweets.map(tweet => (
 	          <Post
 	            key={tweet.id}
 	            displayName={tweet.user.name}

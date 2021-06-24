@@ -1,7 +1,11 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { AiOutlineTwitter } from 'react-icons/ai'
+import { CgSpinnerTwo } from 'react-icons/cg'
+import {useHistory} from 'react-router-dom'
+import {useSelector, useDispatch} from 'react-redux'
 import $http from '../../plugins/axios'
-import {useHistory} from 'react-router-dom';
+import {ErrorAction} from 'actions/ErrorAction'
+import ValidationErrors from 'components/ValidationErrors/ValidationErrors'
 
 function Signup() {
 
@@ -11,10 +15,16 @@ function Signup() {
         username: "",
         password : "",
         password_confirmation : ""        
-    })
-	const [errors, setErrors] = useState("")
+    })	
+
+	const dispatch = useDispatch()
 	const [loading, setLoading] = useState(false)
-	const history = useHistory();
+	const history = useHistory()
+	const errors = useSelector(state=>state.error.errors)
+
+	useEffect(()=>{		
+		dispatch(ErrorAction(null))	
+	},[])
 
     const handleChange = (e) => {        
         setForm({
@@ -25,27 +35,13 @@ function Signup() {
 
 	const submitSignup = async (e) => {
 		e.preventDefault()
-		setLoading(true)
-		//setErrors([])
-
+		setLoading(true)		
     	try{
             await $http.get('/sanctum/csrf-cookie')
-    		const {data} = await $http.post("/register", form)    		
+    		await $http.post("/register", form)    		
             history.push('/login')
-        }catch(e){
-
-        	//console.log(e.response.status)        	        	
-
-			/*let ee = e.response.data.errors
-        	Object.keys(ee).map((key, index) => {
-        	   setErrors([
-        	   	...errors,
-        	   	ee[key]
-        	   ])	
-			   
-			});*/
-            
-            setErrors(e.response.data.message)         
+        }catch(e){            
+            setLoading(false)         
         }   
 	}
 
@@ -60,7 +56,12 @@ function Signup() {
 
 				    	   <AiOutlineTwitter className="text-4xl text-twitter m-auto" />
 				    	   <h1 className="text-2xl font-bold my-10">Create your account</h1>
-
+						    { errors && 
+								<div>
+									<div className="font-medium text-red-600">There was an error</div>
+									<ValidationErrors errors={errors} />
+								</div>
+							}
 					       <form onSubmit={submitSignup}>
 
 					    	   <div className="special-label-holder relative">
@@ -126,23 +127,10 @@ function Signup() {
 						    	   <label className="text-lg h-full left-2 text-gray-500 top-3 overflow-hidden pointer-events-none absolute transition-all duration-200 ease-in-out" for="password_confirmation">Password confirmation</label>
 					    	   </div>
 
-					    	   <button type="submit" className="button mt-5 outline-none">
+					    	   <button disabled={loading} type="submit" className="button flex items-center justify-center w-full mt-5 disabled:opacity-50">
+							   <CgSpinnerTwo className={`loading animate-spin mr-1 ${!loading ? 'hidden' : '' } `} />
 					    	   	Signup
-					    	   </button>
-
-					    	   { errors && 
-					    	   		<div className="text-red-500 text-center"> 
-					    	   			{errors}
-					    	   		</div> 
-					    	   	}
-
-					    	   { /*errors.length && 
-					    	   		<div className="text-red-500 text-center"> 
-					    	   			{
-					    	   				errors.map(error=>(<div>{error}</div>))
-					    	   			} 
-					    	   		</div>*/ 
-					    	   	}
+					    	   </button>				    	  
 
 					    	</form>   
 				    	</div>

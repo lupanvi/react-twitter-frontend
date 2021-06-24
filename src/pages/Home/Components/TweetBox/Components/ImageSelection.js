@@ -42,7 +42,7 @@ const ImageSelection = ({setTweetImage})=>{
               type="file"
               name="file"
               id="file"              
-              class="hidden"
+              className="hidden"
               onChange={(ev) => handleImageSelected(ev)}         
             />
             <label for="file">        

@@ -15,7 +15,7 @@ function Widgets() {
         <div className="trends-container">
           {
             trends.map((trend)=>(            
-                <div className="trend border-t py-2 px-4">
+                <div key={trend.category} className="trend border-t py-2 px-4">
                   <div className="header text-gray-500 text-sm">{trend.category}</div>
                   <div className="trend font-bold">{trend.name}</div>
                   <div className="tweets_number text-gray-500 text-sm">{trend.tweets_count} Tweets</div>

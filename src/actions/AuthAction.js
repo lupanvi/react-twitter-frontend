@@ -1,48 +1,48 @@
 import $http from 'plugins/axios'
 import {
     LOGIN_USER_START,
-    SET_USER,
-    SET_USER_ERROR,
+    SET_USER,    
     CHECK_USER_START,
-	LOGOUT_USER  
+	PURGE_AUTH  
 } from 'types'
-import handleErrorResponse from 'utils/HandleErrorResponse'
+
+import {setAuth, removeAuth} from 'utils/storage'
 
 export function loginUserAction(credentials){
 	return async (dispatch) =>{
-		dispatch(loginUserStart())
-		try{
-            await $http.get('/sanctum/csrf-cookie')
-    		const {data} = await $http.post("/login", credentials) 			
-			dispatch(setUser(data))		
-		}catch(e){									
-			dispatch(setUserError(e.response.data.message))			
-		}
+		await $http.get('/sanctum/csrf-cookie')
+		const {data} = await $http.post("/login", credentials)		
+		dispatch(setUser(data))					
+		setAuth()
 	}
 }
 
 export function checkUserAction(){
-	return async (dispatch) =>{
-		dispatch(checkUserStart())
-		try{            
-    		const {data} = await $http.get("/api/user")  						
-			dispatch(setUser(data))					
-		}catch(e){			
-			dispatch(LogoutUser())								
-		}
+	return async (dispatch) =>{			
+		try{
+			const response = await $http.get("/api/user")  						
+			dispatch(setUser(response.data))				
+		}catch(e){
+			console.log(e)
+		}		
 	}
 }
 
 export function logoutUserAction(){
-	return async (dispatch) =>{		
-		try{			
-			await $http.post('/logout')				
-			dispatch(LogoutUser())					
-		}catch(e){			
-			dispatch(setUserError(e))
-		}
+	return async (dispatch) =>{				
+		await $http.post('/logout')				
+		dispatch(LogoutUser())
+		removeAuth()							
 	}
 }
+
+export function removeUserAction(){
+	return  (dispatch) =>{						
+		dispatch(LogoutUser())
+		removeAuth()							
+	}
+}
+
 
 const checkUserStart = user => ({
 	type: CHECK_USER_START,
@@ -54,16 +54,11 @@ const loginUserStart = user => ({
 	payload: true
 })
 
-const setUser = user => ({
+export const setUser = user => ({
 	type: SET_USER,
 	payload: user
 })
 
 const LogoutUser = () => ({
-	type: LOGOUT_USER		
-})
-
-const setUserError = error => ({
-	type: SET_USER_ERROR,
-	payload: error
+	type: PURGE_AUTH		
 })

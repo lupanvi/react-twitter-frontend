@@ -21,7 +21,7 @@ function App() {
               <GuestLayout>
                 <Switch>
                   <GuestRoute path="/" exact component={Default} />                      
-                  <GuestRoute path="/login" exact component={Login} />	
+                  <GuestRoute path="/login" exact component={Login} />                  
                 </Switch> 
               </GuestLayout>
             </Route>  
@@ -32,7 +32,7 @@ function App() {
                     path="/home" 
                     exact                       
                     component={Home} 
-                  />
+                  />                  
                 </Switch>
               </MainLayout>
             </Route>
