@@ -12,7 +12,6 @@ const $http = axios.create({
 $http.interceptors.response.use(
 	response => response,
 	error => {				
-
 		if (error.response.status === 422) {			
 			store.dispatch(ErrorAction(error.response.data.errors))				
 		} else if (error.response.status === 401) {									
@@ -20,9 +19,7 @@ $http.interceptors.response.use(
 		} else {
 			store.dispatch(ErrorAction(error.response.data))						
 		}	
-
 		return Promise.reject(false)			
-
 	}
 );
 

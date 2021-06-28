@@ -1,11 +1,11 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { AiOutlineTwitter } from 'react-icons/ai'
 import { CgSpinnerTwo } from 'react-icons/cg'
-import {useHistory} from 'react-router-dom'
-import {useSelector, useDispatch} from 'react-redux'
-import $http from '../../plugins/axios'
-import {ErrorAction} from 'actions/ErrorAction'
+import { useHistory } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { ErrorAction } from 'actions/ErrorAction'
 import ValidationErrors from 'components/ValidationErrors/ValidationErrors'
+import { registerUserAction } from 'actions/AuthAction'
 
 function Signup() {
 
@@ -36,9 +36,8 @@ function Signup() {
 	const submitSignup = async (e) => {
 		e.preventDefault()
 		setLoading(true)		
-    	try{
-            await $http.get('/sanctum/csrf-cookie')
-    		await $http.post("/register", form)    		
+    	try{			
+			await dispatch(registerUserAction(form))            		
             history.push('/login')
         }catch(e){            
             setLoading(false)         
@@ -63,7 +62,6 @@ function Signup() {
 								</div>
 							}
 					       <form onSubmit={submitSignup}>
-
 					    	   <div className="special-label-holder relative">
 						    	   <input 
 						    	   	type="text" 
@@ -74,7 +72,7 @@ function Signup() {
 						    	   	value={form.name}
                        				onChange={handleChange}
 						    	   />
-						    	   <label className="text-lg h-full left-2 text-gray-500 top-3 overflow-hidden pointer-events-none absolute transition-all duration-200 ease-in-out" for="name">Name</label>
+						    	   <label className="text-lg h-full left-2 text-gray-500 top-3 overflow-hidden pointer-events-none absolute transition-all duration-200 ease-in-out" htmlFor="name">Name</label>
 					    	   </div>
 					    	   <div className="special-label-holder relative mt-5">
 						    	   <input 
@@ -86,7 +84,7 @@ function Signup() {
 						    	   	value={form.username}
                        				onChange={handleChange}
 						    	   />
-						    	   <label className="text-lg h-full left-2 text-gray-500 top-3 overflow-hidden pointer-events-none absolute transition-all duration-200 ease-in-out" for="name">Username</label>
+						    	   <label className="text-lg h-full left-2 text-gray-500 top-3 overflow-hidden pointer-events-none absolute transition-all duration-200 ease-in-out" htmlFor="name">Username</label>
 					    	   </div>
 					    	   <div className="special-label-holder relative mt-5">	
 						    	   <input 
@@ -98,7 +96,7 @@ function Signup() {
 						    	   	value={form.email}
 						    	   	onChange={handleChange}
 						    	   />
-						    	   <label className="text-lg h-full left-2 text-gray-500 top-3 overflow-hidden pointer-events-none absolute transition-all duration-200 ease-in-out" for="email">Email</label>
+						    	   <label className="text-lg h-full left-2 text-gray-500 top-3 overflow-hidden pointer-events-none absolute transition-all duration-200 ease-in-out" htmlFor="email">Email</label>
 						    	</div>   	
 
 						       <div className="special-label-holder relative mt-5">	
@@ -111,9 +109,8 @@ function Signup() {
 						    	   	value={form.password}
 						    	   	onChange={handleChange}
 						    	   />
-						    	   <label className="text-lg h-full left-2 text-gray-500 top-3 overflow-hidden pointer-events-none absolute transition-all duration-200 ease-in-out" for="password">Password</label>
+						    	   <label className="text-lg h-full left-2 text-gray-500 top-3 overflow-hidden pointer-events-none absolute transition-all duration-200 ease-in-out" htmlFor="password">Password</label>
 					    	   </div>
-
 					    	   <div className="special-label-holder relative mt-5">	
 						    	   <input 
 						    	   	id="password_confirmation"
@@ -124,14 +121,12 @@ function Signup() {
 						    	   	value={form.password_confirmation}
 						    	   	onChange={handleChange}
 						    	   />
-						    	   <label className="text-lg h-full left-2 text-gray-500 top-3 overflow-hidden pointer-events-none absolute transition-all duration-200 ease-in-out" for="password_confirmation">Password confirmation</label>
+						    	   <label className="text-lg h-full left-2 text-gray-500 top-3 overflow-hidden pointer-events-none absolute transition-all duration-200 ease-in-out" htmlFor="password_confirmation">Password confirmation</label>
 					    	   </div>
-
 					    	   <button disabled={loading} type="submit" className="button flex items-center justify-center w-full mt-5 disabled:opacity-50">
 							   <CgSpinnerTwo className={`loading animate-spin mr-1 ${!loading ? 'hidden' : '' } `} />
 					    	   	Signup
-					    	   </button>				    	  
-
+					    	   </button>
 					    	</form>   
 				    	</div>
 				    </div>		

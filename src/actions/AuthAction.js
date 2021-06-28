@@ -23,7 +23,7 @@ export function checkUserAction(){
 			const response = await $http.get("/api/user")  						
 			dispatch(setUser(response.data))				
 		}catch(e){
-			console.log(e)
+			//console.log(e)
 		}		
 	}
 }
@@ -40,6 +40,13 @@ export function removeUserAction(){
 	return  (dispatch) =>{						
 		dispatch(LogoutUser())
 		removeAuth()							
+	}
+}
+
+export function registerUserAction(form){
+	return async (dispatch) =>{				
+		await $http.get('/sanctum/csrf-cookie')		
+		await $http.post("/register", form)    																			
 	}
 }
 
