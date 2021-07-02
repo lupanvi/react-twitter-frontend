@@ -13,7 +13,7 @@ export function getTweetsAction(){
 		dispatch(fetchTweetsStart())
 		try{
 			const {data} = await $http.get('/api/tweets')						
-			dispatch(setTweets(data))		
+			dispatch(setTweets(data.data))		
 		}catch(e){
 			dispatch(setTweetsError(e))
 		}

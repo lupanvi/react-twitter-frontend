@@ -20,8 +20,8 @@ export function loginUserAction(credentials){
 export function checkUserAction(){
 	return async (dispatch) =>{			
 		try{
-			const response = await $http.get("/api/user")  						
-			dispatch(setUser(response.data))				
+			const {data} = await $http.get("/api/user")  						
+			dispatch(setUser(data.data))				
 		}catch(e){
 			//console.log(e)
 		}		
