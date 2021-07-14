@@ -41,8 +41,8 @@ const UserBox = ()=>{
                 >
                 <div className="user_info flex items-center">
                     <img                      
-                    src={user.avatar_path}
-                    className="rounded-full w-10 h-10"                      
+                        src={user.avatar_path}
+                        className="rounded-full w-10 h-10"                      
                     />
                     <div className="user_data ml-2 hidden lg:flex">
                         <div className="name font-bold">{user.name}</div>

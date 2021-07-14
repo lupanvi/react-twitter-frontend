@@ -31,8 +31,8 @@ function Login() {
 	
 	const submitLogin = async (e) => {
 		e.preventDefault()
-		setLoading(true)					
-		try{			
+		setLoading(true)
+		try{
 			await dispatch(loginUserAction(form))			
 			history.push('/home')
 		}catch(e){				

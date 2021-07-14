@@ -17,7 +17,7 @@ $http.interceptors.response.use(
 		} else if (error.response.status === 401 || error.response.status === 403) {									
 			store.dispatch(removeUserAction())
 		} else {
-			store.dispatch(ErrorAction(error.response.data))						
+			return Promise.reject(error.response.data)						
 		}	
 		return Promise.reject(false)			
 	}
