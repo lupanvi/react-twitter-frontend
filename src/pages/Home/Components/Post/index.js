@@ -2,11 +2,19 @@ import React, { forwardRef } from "react"
 import {GoVerified} from 'react-icons/go'
 import {BsChat, BsHeart, BsArrowRepeat} from 'react-icons/bs'
 import {FiShare} from 'react-icons/fi'
+import { useHistory } from "react-router-dom";
 
 const Post = forwardRef(
-  ({ displayName, username, verified, text, image, avatar }, ref) => {
+  ({ displayName, username, verified, text, image, avatar, id }, ref) => {
+
+    let history = useHistory();
+
+    const handleClick =  () => {
+      history.push(`/tweet/${id}`);
+    }
+
     return (
-      <div className="post flex items-start pb-2 border-b border-gray-200" ref={ref} data-test="component-post">
+      <div onClick={handleClick} className="post flex items-start pb-2 border-b border-gray-200" ref={ref} data-test="component-post">
         
         <div className="avatar p-4">          
           <img src={avatar} className="rounded-full h-12 w-12" />          

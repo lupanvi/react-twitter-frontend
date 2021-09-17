@@ -43,6 +43,7 @@ function Feed() {
           tweets.map(tweet => (
 	          <Post
 	            key={tweet.id}
+              id={tweet.id}
 	            displayName={tweet.user.name}
 	            username={tweet.user.username}
 	            verified={tweet.user.verified}
