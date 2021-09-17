@@ -4,8 +4,6 @@ import Home from 'pages/Home'
 import Login from 'pages/Login'
 import Verify from 'pages/Verify'
 import Default from 'pages/Default'
-import MainLayout from 'Layouts/MainLayout'
-import GuestLayout from 'Layouts/GuestLayout'
 import {Provider} from 'react-redux'
 import store from 'store'
 import ProtectedRoute from 'router/ProtectedRoute'
@@ -18,26 +16,10 @@ function App() {
       <Provider store={store}> 
         <Router>        
           <Switch>
-            <Route path={["/", "/login", "/verify-email/:hash"]} exact>
-              <GuestLayout>
-                <Switch>
-                  <GuestRoute path="/" exact component={Default} />                      
-                  <GuestRoute path="/login" exact component={Login} />
-                  <GuestRoute path="/verify-email/:hash" exact component={Verify} />                  
-                </Switch> 
-              </GuestLayout>
-            </Route>  
-            <Route path={["/home"]} exact>
-              <MainLayout>
-                <Switch>                    
-                  <ProtectedRoute                     
-                    path="/home" 
-                    exact                       
-                    component={Home} 
-                  />                  
-                </Switch>
-              </MainLayout>
-            </Route>
+            <GuestRoute path="/" exact component={Default} />                      
+            <GuestRoute path="/login" exact component={Login} />
+            <GuestRoute path="/verify-email/:hash" exact component={Verify} />           
+            <ProtectedRoute path="/home" exact component={Home} />             
           </Switch>                                           
         </Router> 
       </Provider>

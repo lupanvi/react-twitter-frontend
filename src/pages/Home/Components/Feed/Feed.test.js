@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { findByTestAttr } from '../../../../../test/testUtils';
+import { findByTestAttr } from 'testUtils';
 import Feed from './index';
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 
