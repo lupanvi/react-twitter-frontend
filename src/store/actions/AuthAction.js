@@ -21,9 +21,9 @@ export function checkUserAction(){
 	return async (dispatch) =>{			
 		try{
 			const {data} = await $http.get("/api/user")  						
-			dispatch(setUser(data))				
+			dispatch(setUser(data.data))				
 		}catch(e){
-			//console.log(e)
+			console.log(e)
 		}		
 	}
 }

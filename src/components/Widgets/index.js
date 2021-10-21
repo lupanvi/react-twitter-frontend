@@ -1,6 +1,6 @@
 import React from "react"
 import trends from 'data/trends'
-import Search from '../Search'
+import Search from '../../pages/Home/Components/Search'
 
 function Widgets() {
   return (

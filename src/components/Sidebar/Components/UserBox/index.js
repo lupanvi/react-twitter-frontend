@@ -2,7 +2,7 @@ import React,{useState,createRef} from 'react'
 import {useSelector,useDispatch} from 'react-redux'
 import { createPopper } from "@popperjs/core"
 import {useHistory} from 'react-router-dom';
-import {logoutUserAction} from 'actions/AuthAction'
+import {logoutUserAction} from 'store/actions/AuthAction'
 import {BsCheck} from 'react-icons/bs'
 
 const UserBox = ()=>{

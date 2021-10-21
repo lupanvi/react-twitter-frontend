@@ -3,8 +3,8 @@ import { AiOutlineTwitter } from 'react-icons/ai'
 import { CgSpinnerTwo } from 'react-icons/cg'
 import {useSelector, useDispatch} from 'react-redux'
 import {useHistory} from 'react-router-dom';
-import {loginUserAction} from 'actions/AuthAction'
-import {ErrorAction} from 'actions/ErrorAction'
+import {loginUserAction} from 'store/actions/AuthAction'
+import {ErrorAction} from 'store/actions/ErrorAction'
 import ValidationErrors from 'components/ValidationErrors/ValidationErrors'
 import GuestLayout from 'Layouts/GuestLayout'
 

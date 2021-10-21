@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { findByTestAttr } from 'testUtils';
-import Sidebar from './';
+import Sidebar from '.';
 
 const setup = ()=>{
 	const wrapper = shallow(<Sidebar />);

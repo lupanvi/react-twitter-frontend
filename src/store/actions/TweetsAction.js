@@ -39,7 +39,8 @@ export function addTweetAction(tweet){
 	return async (dispatch) =>{		
 		try{
 			const {data} = await $http.post('/api/tweets', tweet)
-			dispatch(addTweetSuccess(data))		
+			dispatch(addTweetSuccess(data.data))
+			return data.data
 		}catch(e){
 			
 		}

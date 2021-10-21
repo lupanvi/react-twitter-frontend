@@ -15,7 +15,7 @@ import UserBox from './Components/UserBox'
 
 const Sidebar = (props) => {
   return (
-    <div className="sidebar flex flex-col justify-between px-7 pt-5 h-screen border-r-2" data-test="component-sidebar">
+    <div className="sidebar flex flex-col justify-between px-7 pt-5 h-screen" data-test="component-sidebar">
       <div className="options">
         <AiOutlineTwitter className="mb-5 text-3xl ml-3 text-twitter " data-test="twitter-icon" />
         <SidebarOption active Icon={RiHome7Fill} text="Home" data-test="home-icon" />

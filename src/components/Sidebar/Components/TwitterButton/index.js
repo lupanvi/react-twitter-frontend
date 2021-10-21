@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import {ReactComponent as TwitterButtonIcon} from 'assets/img/TwitterButtonIcon.svg'
-import TweetBox from 'pages/Home/Components/TweetBox'
+import TweetBox from 'components/TweetBox'
 import Modal from 'components/Modal'
 
 const TwitterButton = ()=>{

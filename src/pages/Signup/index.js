@@ -3,9 +3,9 @@ import { AiOutlineTwitter } from 'react-icons/ai'
 import { CgSpinnerTwo } from 'react-icons/cg'
 import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { ErrorAction } from 'actions/ErrorAction'
+import { ErrorAction } from 'store/actions/ErrorAction'
 import ValidationErrors from 'components/ValidationErrors/ValidationErrors'
-import { registerUserAction } from 'actions/AuthAction'
+import { registerUserAction } from 'store/actions/AuthAction'
 import GuestLayout from 'Layouts/GuestLayout'
 
 function Signup() {

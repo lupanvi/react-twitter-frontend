@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom'
 import './index.css'
 import App from './components/App'
 import reportWebVitals from './reportWebVitals'
-import store from 'store'
-import {checkUserAction} from 'actions/AuthAction'
+import store from 'store/store'
+import {checkUserAction} from 'store/actions/AuthAction'
 
 store.dispatch(checkUserAction())
 

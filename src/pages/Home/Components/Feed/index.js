@@ -2,9 +2,9 @@ import React,{useEffect} from "react"
 import {useSelector, useDispatch} from 'react-redux'
 import FlipMove from "react-flip-move"
 import "./Feed.css"
-import TweetBox from '../TweetBox'
-import Post from '../Post'
-import {getTweetsAction} from 'actions/TweetsAction'
+import TweetBox from 'components/TweetBox'
+import Post from 'components/Post'
+import {getTweetsAction} from 'store/actions/TweetsAction'
 import {AiOutlineLoading3Quarters} from 'react-icons/ai'
 
 function Feed() {
@@ -20,7 +20,7 @@ function Feed() {
   const errors = useSelector(state => state.error.errors)
 
   return (
-    <div className="feed border-r overflow-y-scroll w-full flex-shrink-0 max-w-screen-sm" data-test="component-feed">
+    <div className="feed border-r w-full" data-test="component-feed">
       <div className="feed__header sticky top-0 border-b border-gray-200 bg-white py-4 px-5 z-10">
         <h2 className="font-bold text-2xl">Home</h2>       
       </div>      

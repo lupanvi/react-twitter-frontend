@@ -1,7 +1,7 @@
 import axios from 'axios'
-import { ErrorAction } from 'actions/ErrorAction'
-import { removeUserAction } from 'actions/AuthAction'
-import store from 'store'
+import { ErrorAction } from 'store/actions/ErrorAction'
+import { removeUserAction } from 'store/actions/AuthAction'
+import store from 'store/store'
 
 const $http = axios.create({
 	baseURL: process.env.REACT_APP_URL_BACKEND,

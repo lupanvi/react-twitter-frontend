@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import {useDispatch, useSelector} from 'react-redux';
 import ImageSelection from "./Components/ImageSelection"
-import {addTweetAction} from 'actions/TweetsAction'
+import {addTweetAction} from 'store/actions/TweetsAction'
 
 function TweetBox(props) {
   const initialTweetImage = {
@@ -17,18 +17,28 @@ function TweetBox(props) {
     e.preventDefault()
     
     let data = new FormData()
-    data.append('image_path', tweetImage.image_file)            
-    data.append('content', tweetMessage)                 
+    if (tweetImage.image_file && tweetImage.image_src){
+      data.append('image_path', tweetImage.image_file)
+    }    
+    data.append('content', tweetMessage)
+    
+    if (props.parent){
+      data.append('parent_id', props.parent)
+    }   
 
-    await dispatch(addTweetAction(data))    
+    const tweet =  await dispatch(addTweetAction(data))            
 
     setTweetMessage("")
     setTweetImage(initialTweetImage)           
+    
+    if (props.newReply){
+      props.newReply(tweet)
+    }
 
     //if it was open from a modal, we need to close it  
     if (props.onClose){
       props.onClose(true)
-    }                   
+    }          
 
   }
 
